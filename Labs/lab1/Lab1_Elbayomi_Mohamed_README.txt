@@ -13,7 +13,7 @@ Authors
 ============================================================================
 Built With
 -----------
-[HTML](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML) - Structure of the website  
+[short HTML code]structure of the website  
 [gitlab] [To Clone it](git clone https://git.cs.dal.ca/melbayomi/csci3172.git) do this on any command prompt  
 [Timberlea Web Server](https://web.cs.dal.ca/~melbayomi/csci3172/labs/lab1/) - Hosting and previewing lab work  
 =============================================================================
@@ -24,7 +24,6 @@ If in later labs I adapt any external code, I will document it.
 ==================================================================================
 In completing this lab, no AI-generated code was used as I just wrote a small HTML code and it didn't require any AI at all.    
 ========================================================================================
-
 The explanation helped me confirm that:  
 - Folders must use `755` permissions.  
 - Files must use `644` permissions.
