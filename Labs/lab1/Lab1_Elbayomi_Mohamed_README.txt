@@ -15,7 +15,8 @@ Built With
 -----------
 [short HTML code]structure of the website  
 [gitlab] [To Clone it](git clone https://git.cs.dal.ca/melbayomi/csci3172.git) do this on any command prompt  
-[Timberlea Web Server](https://web.cs.dal.ca/~melbayomi/csci3172/labs/lab1/) - Hosting and previewing lab work  
+[Timberlea Web Server](https://web.cs.dal.ca/~melbayomi/csci3172/labs/lab1/) - Hosting and previewing lab work
+timberlea link can see the website but the git link you have to clone it first then ssee it on computer  
 =============================================================================
 Sources Used
 -------------
@@ -29,10 +30,10 @@ The explanation helped me confirm that:
 - Files must use `644` permissions.
 - I checked them by typing (ls -l) on the command prompt  
 =======================================================================================
-#### File Name which is the website itself  
+#### File Name which is the website itself  ****************
 index.html
 Lab1_Elbayomi_Mohamed_README.txt "is the README file for the lab"
 ======================================================================================    
 Acknowledgments
 ----------------  
-TAs and Instructor for guidance
+TAs and Instructor for guidance and grading this assignment
