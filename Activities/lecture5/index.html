@@ -1,28 +1,56 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Lecture5 – Magic 8-Ball + Fortune Cookie</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <style>
-    body { font-family: Arial, sans-serif; max-width: 700px; margin: 2rem auto; }
-    .row { display: flex; gap: 0.5rem; }
-    input { flex: 1; padding: 0.5rem; }
-    button { padding: 0.6rem 1rem; cursor: pointer; }
-    #answerBox { margin-top: 1rem; padding: 1rem; border: 1px solid #ddd; border-radius: 8px; }
-    small { color: #666; }
-  </style>
-</head>
-<body>
-  <h1>Magic 8-Ball + Fortune Cookie</h1>
-  <div class="row">
-    <input id="question" type="text" placeholder="Ask a yes/no question…" />
-    <button id="askBtn">Ask</button>
-  </div>
-  <div id="answerBox">
-    <div id="source"><small>— Are we staying here for so long? —</small></div>
-    <p id="answer">…</p>
-  </div>
-  <script src="script.js"></script>
-</body>
-</html>
+<script>
+var eightBallSayings = [
+  "It is certain.",
+  "Agueeeerrrrrrooooooooooooooooooooooo",
+  "I Just came to say hello ",
+  "Ask again later.",
+  "Better not tell you now.",
+  "Enjoy the journy",
+  "Messi! show them some respect, Cmon, everytime you do it.",
+  "Sweet but Psycho",
+  "I swear You will never see anything like this ever again.",
+  "winaldjiuuuuummmmm"
+];
+var fortuneCookies = [
+  "I believe in Believe.",
+  "Never Say Never.",
+  "Ancara Messi.",
+  "Believe it can be done.",
+  "alqadya momken",
+  "Your abilities are unparalleled.",
+  "All your hard work will soon pay off.",
+  "Adventure can be real happiness.",
+  "Barbecue sauce",
+  "A lifetime of happiness lies ahead of you."
+];
+function getAnswer() {
+  var pickList = Math.random();
+  var list;
+  var label;
+  if (pickList < 0.5) {
+    list = eightBallSayings;
+    label = "Magic 8-Ball";
+  } else {
+    list = fortuneCookies;
+    label = "Fortune Cookie";
+  }
+
+  var idx = Math.floor(Math.random() * list.length);
+  var text = list[idx];
+  return { source: label, text: text };
+}
+var btn = document.getElementById("askBtn");
+var questionInput = document.getElementById("question");
+var sourceEl = document.getElementById("source");
+var answerEl = document.getElementById("answer");
+btn.addEventListener("click", function () {
+  var result = getAnswer();
+  sourceEl.textContent = result.source;
+  answerEl.textContent = result.text;
+});
+questionInput.addEventListener("keydown", function (e) {
+  if (e.key === "Enter") {
+    btn.click();
+  }
+});
+</script>
