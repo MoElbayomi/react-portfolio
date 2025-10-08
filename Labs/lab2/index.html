@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Magical Inventory System</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="light">
+  <h1>Magical Shop Inventory</h1>
+  <h2>Here you will find anything you need, just enjoy</h2>
+  <button id="themeToggle">Switch Theme</button>
+  <div id="controls">
+    <input id="searchBox" type="text" placeholder="Search by name or type">
+    <button onclick="searchItems()">Search</button>
+    <button onclick="listItems()">List All</button>
+    <button onclick="calculateTotalValue()">Total Value</button>
+  </div>
+  <table id="inventoryTable">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody id="inventoryBody"></tbody>
+  </table>
+  <script src="js/script.js"></script>
+</body>
+</html>
+
