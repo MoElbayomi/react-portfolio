@@ -1,21 +1,25 @@
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: Arial, sans-serif;
   margin: 20px;
-  background-color: #121212;
-  color: #e4e4e4;
-  transition: background-color 0.5s, color 0.5s;
+  background: linear-gradient(135deg, #0a0f29, #1a1b3a, #080b1a);
+  color: #d7d7ff;
+  transition: background 0.6s ease, color 0.6s ease;
+  min-height: 100vh;
 }
 
 h1 {
-  color: #9b59b6;
+  color: #b48ef7;
   text-align: center;
   margin-bottom: 5px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 10px #7a55cc;
 }
 
 h2 {
   text-align: center;
-  color: #bca3e6;
-  margin-bottom: 20px;
+  color: #a89ff0;
+  margin-bottom: 25px;
+  font-weight: normal;
 }
 
 #controls {
@@ -24,76 +28,139 @@ h2 {
 }
 
 input {
-  padding: 8px;
-  border-radius: 4px;
-  border: 1px solid #666;
-  background-color: #1e1e1e;
-  color: #e4e4e4;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #5b5b8f;
+  background-color: #141530;
+  color: #e4e4ff;
+  margin: 5px;
+  outline: none;
+  transition: 0.3s;
+}
+
+input:focus {
+  border-color: #9b59b6;
+  background-color: #1f2045;
+  box-shadow: 0 0 8px #9b59b6;
 }
 
 button {
-  margin: 5px;
-  padding: 8px 12px;
+  margin: 6px;
+  padding: 8px 14px;
   cursor: pointer;
   border: none;
-  background-color: #9b59b6;
-  color: white;
-  border-radius: 4px;
-  transition: background-color 0.6s;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #7144b8, #4a2e8b);
+  color: #ffffff;
+  font-weight: bold;
+  transition: 0.3s;
 }
 
 button:hover {
-  background-color: #b47bd2;
+  background: linear-gradient(135deg, #8a5fe0, #6336b3);
+  box-shadow: 0 0 10px #8254d8;
 }
+
 table {
   width: 100%;
   border-collapse: collapse;
-  background-color: #1f1f1f;
+  margin-top: 10px;
   border-radius: 8px;
   overflow: hidden;
+  background: rgba(25, 25, 50, 0.85);
+  box-shadow: 0 0 15px rgba(120, 100, 200, 0.3);
 }
 
 th, td {
-  padding: 10px;
+  padding: 12px 14px;
   text-align: left;
 }
 
 th {
-  background-color: #292929;
-  color: #f5f5f5;
+  background-color: rgba(45, 45, 90, 0.9);
+  color: #ececff;
+  letter-spacing: 0.5px;
+  font-weight: 600;
 }
 
 tr:nth-child(even) {
-  background-color: #2a2a2a;
+  background-color: rgba(35, 35, 70, 0.8);
 }
 
 tr:hover {
-  background-color: #3a3a3a;
+  background-color: rgba(60, 60, 120, 0.8);
+  transition: background 0.3s;
 }
 
-body.light {
-  background-color: #f4f4f4;
-  color: #222;
-}
-body.light table {
-  background-color: white;
-}
-body.light th {
-  background-color: #e0e0e0;
-  color: #333;
-}
-body.light tr:nth-child(even) {
-  background-color: #f7f7f7;
-}
-body.light button {
-  background-color: #4b0082;
-}
-body.light button:hover {
-  background-color: #6a0dad;
-}
 #extraInfo {
-  margin-top: 20px;
+  margin-top: 25px;
   padding: 10px;
   text-align: center;
   font-size: 1.1em;
+  color: #cfcfff;
+  background: rgba(20, 20, 50, 0.4);
+  border-radius: 8px;
+  box-shadow: 0 0 12px rgba(90, 70, 200, 0.4);
+}
+body.light {
+  background: linear-gradient(135deg, #bcbcf0, #a9a8ff, #c6c7ff);
+  color: #1c1233;
+}
+
+body.light h1 {
+  color: #503b91;
+  text-shadow: 0 0 5px #b8a8ff;
+}
+
+body.light h2 {
+  color: #4f3e9d;
+}
+
+body.light input {
+  background-color: #e5e5ff;
+  color: #2a1b55;
+  border: 1px solid #a190f0;
+}
+
+body.light input:focus {
+  background-color: #dcd8ff;
+  box-shadow: 0 0 6px #7d6ce8;
+}
+
+body.light button {
+  background: linear-gradient(135deg, #6c4be5, #9176f5);
+  color: #fff;
+}
+
+body.light button:hover {
+  background: linear-gradient(135deg, #8160f0, #a58cff);
+  box-shadow: 0 0 10px rgba(90, 60, 180, 0.4);
+}
+
+body.light table {
+  background: rgba(245, 245, 255, 0.8);
+  box-shadow: 0 0 10px rgba(150, 140, 250, 0.3);
+}
+
+body.light th {
+  background-color: #d4ceff;
+  color: #2a1d5a;
+}
+
+body.light tr:nth-child(even) {
+  background-color: #f1efff;
+}
+
+body.light tr:hover {
+  background-color: #e4e1ff;
+}
+
+body.light #extraInfo {
+  background: rgba(235, 230, 255, 0.8);
+  color: #2a1b55;
+  box-shadow: 0 0 8px rgba(80, 60, 180, 0.4);
+}
+
+* {
+  transition: all 0.3s ease-in-out;
 }

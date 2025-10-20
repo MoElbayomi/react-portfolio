@@ -13,6 +13,7 @@ let inventory = [
   { name: "Casemiro Shield Spell", type: "Defense Spell", price: 8200000, quantity: 1, description: "Creates an invisible shield that enhances tackling and composure." },
   { name: "Neymar Trick Gloves", type: "Trick Item", price: 8800000, quantity: 1, description: "Grants fancy footwork and flair like Neymar." }
 ];
+
 // Display all items
 function listItems() {
   const tbody = document.getElementById("inventoryBody");
@@ -25,12 +26,12 @@ function listItems() {
       <td>$${item.price.toLocaleString()}</td>
       <td>${item.quantity}</td>
       <td>${item.description}</td>
+      <td><button onclick="removeItem('${item.name}')">Remove</button></td>
     `;
     tbody.appendChild(row);
   });
   document.getElementById("extraInfo").textContent = "";
 }
-
 // Add new item
 function addItem(newItem) {
   if (!newItem.name || !newItem.price || !newItem.type) {
@@ -40,23 +41,19 @@ function addItem(newItem) {
   inventory.push(newItem);
   listItems();
 }
-
-//Add form
+// Add form handler
 function handleAdd() {
   const name = document.getElementById("addName").value.trim();
   const type = document.getElementById("addType").value.trim();
-  const price = parseFloat(document.getElementById("addPrice").value);
-  const qty = parseInt(document.getElementById("addQty").value);
+  const price = Number(document.getElementById("addPrice").value);
+  const qty = Number(document.getElementById("addQty").value);
   const desc = document.getElementById("addDesc").value.trim();
-
   if (!name || !type || isNaN(price) || isNaN(qty) || !desc) {
     alert("Please fill out all fields with valid values.");
     return;
   }
-
   addItem({ name, type, price, quantity: qty, description: desc });
 
-  // Clear inputs
   document.getElementById("addName").value = "";
   document.getElementById("addType").value = "";
   document.getElementById("addPrice").value = "";
@@ -71,9 +68,9 @@ function removeItem(itemName) {
   const before = inventory.length;
   inventory = inventory.filter(item => item.name.toLowerCase() !== itemName.toLowerCase());
   if (inventory.length < before) {
-    alert(`${itemName} was removed successfully.`);
+    document.getElementById("extraInfo").textContent = `${itemName} was removed successfully, lesssgoooooo.`;
   } else {
-    alert(`No item named '${itemName}' found.`);
+    document.getElementById("extraInfo").textContent = `No item named '${itemName}' was found.`;
   }
   listItems();
 }
@@ -107,6 +104,7 @@ function searchItems() {
       <td>$${item.price.toLocaleString()}</td>
       <td>${item.quantity}</td>
       <td>${item.description}</td>
+      <td><button onclick="removeItem('${item.name}')">Remove</button></td>
     `;
     tbody.appendChild(row);
   });
@@ -116,7 +114,7 @@ function searchItems() {
 // Calculate total value
 function calculateTotalValue() {
   const total = inventory.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  document.getElementById("extraInfo").textContent = `💰 Total inventory value: $${total.toLocaleString()}`;
+  document.getElementById("extraInfo").textContent = `Total inventory value: $${total.toLocaleString()}`;
 }
 
 // Group by category
@@ -126,15 +124,13 @@ function groupByCategory() {
     if (!grouped[item.type]) grouped[item.type] = [];
     grouped[item.type].push(item);
   }
-
-  let output = "🧾 Inventory grouped by type:<br>";
+  let output = "Inventory grouped by type:<br>";
   for (let type in grouped) {
     output += `<strong>${type}</strong>: ${grouped[type].map(i => i.name).join(", ")}<br>`;
   }
   document.getElementById("extraInfo").innerHTML = output;
 }
-
-// DISSCOUNT
+// Apply discount
 function applyDiscount(percent) {
   for (let item of inventory) {
     item.price -= (item.price * percent) / 100;
@@ -142,8 +138,7 @@ function applyDiscount(percent) {
   listItems();
   document.getElementById("extraInfo").textContent = `${percent}% discount applied to all items!`;
 }
-
-//Find duplicates
+// Find duplicates
 function findDuplicates() {
   const seen = new Set();
   const duplicates = new Set();
@@ -155,11 +150,9 @@ function findDuplicates() {
     alert("Duplicate items found: " + Array.from(duplicates).join(", "));
   else alert("No duplicates found!");
 }
-
-//Theme toggle
+// Theme toggle
 document.getElementById("themeToggle").addEventListener("click", () => {
   document.body.classList.toggle("light");
 });
-
-//Initialize page
+// Initialize
 window.onload = listItems;
