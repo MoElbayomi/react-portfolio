@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recipe Recommender</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>🥗 Recipe Recommender</h1>
+    <p>Type one or more ingredients separated by commas:</p>
+
+    <form id="recipeForm">
+      <input id="ingredient" type="text" placeholder="e.g., chicken, rice" required />
+      <select id="diet">
+        <option value="Any">Any</option>
+        <option value="Vegetarian">Vegetarian</option>
+        <option value="Vegan">Vegan</option>
+        <option value="Gluten Free">Gluten-Free</option>
+      </select>
+      <button type="submit">Find Recipes</button>
+    </form>
+
+    <button id="randomBtn" class="random-btn">🎲 Surprise Me!</button>
+    <div id="result"></div>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
