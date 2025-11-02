@@ -1,54 +1,67 @@
-import express from "express";
-import fetch from "node-fetch";
-import cors from "cors";
+// Complete working Recipe Recommender server
+import http from "http";
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
 
-const app = express();
-app.use(cors());
-app.use(express.json());
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const PORT = 3000;
 
-// GET route for recipe recommendations
-app.get("/api/recipes", async (req, res) => {
-  const { ingredient, diet } = req.query;
+const sendFile = (filePath, res, contentType) => {
+  fs.readFile(filePath, (err, data) => {
+    if (err) {
+      res.writeHead(404);
+      res.end("Not Found");
+    } else {
+      res.writeHead(200, { "Content-Type": contentType });
+      res.end(data);
+    }
+  });
+};
 
-  if (!ingredient) {
-    return res.status(400).json({ error: "Ingredient is required." });
+const server = http.createServer(async (req, res) => {
+  if (req.url.startsWith("/api/recipes")) {
+    const urlObj = new URL(req.url, `http://${req.headers.host}`);
+    const ingredients = urlObj.searchParams.get("ingredients");
+
+    if (!ingredients) {
+      res.writeHead(400, { "Content-Type": "application/json" });
+      return res.end(JSON.stringify({ error: "Missing ingredients" }));
+    }
+
+    try {
+      const api = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${encodeURIComponent(
+        ingredients
+      )}`;
+      const apiRes = await fetch(api);
+      const data = await apiRes.json();
+      res.writeHead(200, { "Content-Type": "application/json" });
+      res.end(JSON.stringify(data));
+    } catch (err) {
+      res.writeHead(500, { "Content-Type": "application/json" });
+      res.end(JSON.stringify({ error: "Failed to fetch recipes" }));
+    }
+    return;
   }
 
-  try {
-    // Split ingredients into array
-    const ingredients = ingredient.split(",").map(i => i.trim()).filter(Boolean);
-    let allMeals = [];
-
-    // Fetch recipes for each ingredient
-    for (const ing of ingredients) {
-      const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${encodeURIComponent(ing)}`);
-      const data = await response.json();
-      if (data.meals) {
-        allMeals = allMeals.concat(data.meals);
-      }
-    }
-
-    // Remove duplicates by meal ID
-    const uniqueMeals = Array.from(new Map(allMeals.map(m => [m.idMeal, m])).values());
-
-    // Apply simple diet keyword filter
-    let filteredMeals = uniqueMeals;
-    if (diet && diet !== "Any") {
-      filteredMeals = uniqueMeals.filter(m =>
-        m.strMeal.toLowerCase().includes(diet.toLowerCase())
-      );
-    }
-
-    if (filteredMeals.length === 0) {
-      return res.json({ meals: [] });
-    }
-
-    res.json({ meals: filteredMeals });
-  } catch (err) {
-    console.error("Server error:", err);
-    res.status(500).json({ error: "Failed to fetch recipes." });
-  }
+  // serve static frontend files
+  let filePath =
+    req.url === "/"
+      ? path.join(__dirname, "frontend", "index.html")
+      : path.join(__dirname, "frontend", req.url);
+  const ext = path.extname(filePath);
+  const contentType =
+    ext === ".html"
+      ? "text/html"
+      : ext === ".css"
+      ? "text/css"
+      : ext === ".js"
+      ? "application/javascript"
+      : "text/plain";
+  sendFile(filePath, res, contentType);
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+server.listen(PORT, () =>
+  console.log(`Go check the http link as the Server running at http://localhost:${PORT}`)
+);

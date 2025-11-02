@@ -1,0 +1,11 @@
+[functions]
+  # Ensure the bundler includes external modules like express and cors
+  external_node_modules = ["express", "cors"]
+  node_bundler = "esbuild"
+
+[[redirects]]
+  # Proxy all API requests to the Netlify function
+  from = "/api/*"
+  to = "/.netlify/functions/api/:splat"
+  status = 200
+  force = true
