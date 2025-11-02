@@ -1,4 +1,3 @@
-// Complete working Recipe Recommender server
 import http from "http";
 import fs from "fs";
 import path from "path";
@@ -45,7 +44,7 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
-  // serve static frontend files
+  // serve  frontend files
   let filePath =
     req.url === "/"
       ? path.join(__dirname, "frontend", "index.html")
