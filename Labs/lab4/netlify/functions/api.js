@@ -1,33 +1,11 @@
-// Recipe recommender API implemented as a Netlify function.
-//
-// This endpoint exposes a single route at `/api/recipes` which accepts
-// query parameters:
-//   - ingredients: a comma‑separated list of available ingredients
-//   - diet (optional): a dietary preference such as "vegetarian" or "gluten-free"
-//
-// It queries the free public API at TheMealDB to retrieve recipes that match
-// the first ingredient provided, then fetches details for each match and
-// computes a simple match score based on how many of the provided
-// ingredients appear in each recipe's ingredient list. If no recipes are
-// returned for the initial ingredient, the API falls back to returning a
-// random selection of recipes as a human‑friendly default.
-
 import express from "express";
 import serverless from "serverless-http";
-import fetch from "node-fetch";
 import dotenv from "dotenv";
 
-// Load environment variables from .env when present. This allows the same file
-// to be used on Netlify (where env vars are automatically injected) and
-// locally without requiring extra configuration.
 dotenv.config();
 
 const app = express();
 
-// Enable simple CORS by setting response headers. This allows the local
-// frontend (running on a different port) to call this API during
-// development. On Netlify, requests originate from the same origin, so CORS
-// headers are still harmless.
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Headers", "*");
@@ -36,13 +14,6 @@ app.use((req, res, next) => {
 
 const router = express.Router();
 
-/**
- * Helper to fetch meal details from TheMealDB by ID.
- * Returns a parsed meal object or null if the lookup fails.
- *
- * @param {string} idMeal The numeric ID of the meal to look up
- * @returns {Promise<Object|null>}
- */
 async function fetchMealDetails(idMeal) {
   const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idMeal}`;
   const resp = await fetch(url);
@@ -51,15 +22,6 @@ async function fetchMealDetails(idMeal) {
   return data.meals ? data.meals[0] : null;
 }
 
-/**
- * Compute a simple score for a meal based on matching ingredients.
- * The more ingredients from the user input that appear in the meal's
- * ingredient list, the higher the score.
- *
- * @param {Object} meal The meal object returned from TheMealDB
- * @param {string[]} ingList List of user‑provided ingredients (lowercased)
- * @returns {number}
- */
 function computeMatchScore(meal, ingList) {
   const mealIngredients = [];
   for (let i = 1; i <= 20; i++) {
@@ -78,11 +40,9 @@ function computeMatchScore(meal, ingList) {
   return score;
 }
 
-// Main route: GET /recipes
 router.get("/recipes", async (req, res) => {
   try {
     const { ingredients = "", diet = "" } = req.query;
-    // Normalize and split the comma‑separated ingredients into an array
     const ingList = ingredients
       .split(",")
       .map((s) => s.trim().toLowerCase())
@@ -94,8 +54,6 @@ router.get("/recipes", async (req, res) => {
       });
     }
 
-    // Use TheMealDB's filter endpoint with the first ingredient.
-    // If no meals are returned, we'll fall back to a random query later.
     const first = encodeURIComponent(ingList[0]);
     const filterUrl = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${first}`;
     const filterResp = await fetch(filterUrl);
@@ -104,9 +62,6 @@ router.get("/recipes", async (req, res) => {
     let meals = filterData.meals;
     let notice = "";
 
-    // If no meals were found for the given ingredient, fetch a random list
-    // of meals to provide the user with something useful. TheMealDB's
-    // search endpoint with an empty query returns many meals.
     if (!meals) {
       const randomResp = await fetch(
         "https://www.themealdb.com/api/json/v1/1/search.php?s="
@@ -117,8 +72,6 @@ router.get("/recipes", async (req, res) => {
         "No exact matches found. Showing random recipes instead. Try another ingredient for more accurate results.";
     }
 
-    // Fetch details for the top 8 meals. Fetching only a handful keeps the
-    // response time reasonable, and eight recipes is sufficient for a small UI.
     const detailPromises = meals.slice(0, 8).map((m) => fetchMealDetails(m.idMeal));
     const detailedMeals = (await Promise.all(detailPromises)).filter(Boolean);
 
