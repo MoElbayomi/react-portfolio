@@ -1,30 +1,31 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import 'bootstrap/dist/css/bootstrap.min.css'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Header from './components/Header.jsx'
-import Footer from './components/Footer.jsx'
-import Home from './pages/Home.jsx'
-import About from './pages/About.jsx'
-import Projects from './pages/Projects.jsx'
-import NotFound from './pages/NotFound.jsx'
+import Header from "./components/Header.jsx";
+import Footer from "./components/Footer.jsx";
 
-function Layout({ children }) {
-  return (
-    <>
+import Home from "./pages/Home.jsx";
+import About from "./pages/About.jsx";
+import Projects from "./pages/Projects.jsx";
+import NotFound from "./pages/NotFound.jsx";
+
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./style.css";
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <BrowserRouter>
       <Header />
-      <div id="main">{children}</div>
+      <main id="main" className="mt-4">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </main>
       <Footer />
-    </>
-  );
-}
-
-const router = createBrowserRouter([
-  { path: "/", element: <Layout><Home /></Layout> },
-  { path: "/about", element: <Layout><About /></Layout> },
-  { path: "/projects", element: <Layout><Projects /></Layout> },
-  { path: "*", element: <Layout><NotFound /></Layout> }, // 404 for unknown routes
-]);
-
-ReactDOM.createRoot(document.getElementById('root')).render(<RouterProvider router={router} />)
+    </BrowserRouter>
+  </React.StrictMode>
+);
