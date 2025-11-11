@@ -1,14 +1,12 @@
 export default function Footer() {
   return (
-    <footer className="py-4 mt-auto border-top">
-      <div className="container d-flex justify-content-between align-items-center">
-        <p className="m-0">© {new Date().getFullYear()} Mohamed Elbayomi</p>
-        <nav aria-label="Footer">
-          <a className="me-3" href="mailto:Mh214513@dal.ca">Email</a>
-          <a className="me-3" href="https://github.com/melbayomi" rel="noopener noreferrer">GitHub</a>
-          <a href="https://www.linkedin.com/" rel="noopener noreferrer">LinkedIn</a>
-        </nav>
-      </div>
+    <footer className="text-center py-3 mt-5 border-top">
+      <p>© {new Date().getFullYear()} Mohamed Elbayomi</p>
+      <p>
+        <a href="mailto:Mh214513@dal.ca" className="mx-2">MyEmail</a>
+        <a href="https://github.com/MoElbayomi" target="_blank" className="mx-2">GitHub</a>
+        <a href="https://www.linkedin.com/in/mohamed-elbayomi/" target="_blank" className="mx-2">MyLinkedIn</a>
+      </p>
     </footer>
   );
 }
