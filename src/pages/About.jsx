@@ -1,16 +1,22 @@
 export default function About() {
   return (
-    <main id="main" className="container section">
-      <h1>About</h1>
-      <p>
-        I’m a third-year CS student at Dalhousie. Interests: data analysis (football), and simple, anything related to soccer.
+    <div>
+      <h1>About Me</h1>
+      <p>I am Mohamed Elbayomi, a Computer Science student at Dalhousie University with a strong interest in football performance analysis and data-driven decision making in sports.</p>
+      
+      <p>I previously played as a goalkeeper, which gave me a tactical understanding of match dynamics, defensive structures, and build-up strategies. This experience naturally led me into the analytical side of football.</p>
+      
+      <p>My work focuses on:
+        <ul>
+          <li>Player performance evaluation</li>
+          <li>Match analysis & tactical breakdowns</li>
+          <li>Data visualization for coaching & scouting support</li>
+        </ul>
       </p>
-      <h2 className="h4 mt-4">Education & Skills</h2>
-      <ul>
-        <li>Education: BCS @ Dalhousie</li>
-        <li>Languages/Tools: Java, Python, JS/React, Tableau, Git, Power BI</li>
-        <li>Goal: Build useful tools and clear visualizations and to be the best soccer analyst in the world</li>
-      </ul>
-    </main>
+
+      <p>Technical Skills: Python, Pandas, Matplotlib, Tableau, React, Git, AWS.</p>
+      
+      <p>Career Goal: Contribute to a football club or analytics organization by combining tactical knowledge with data science to support smarter coaching, scouting, and game preparation.</p>
+    </div>
   );
 }
