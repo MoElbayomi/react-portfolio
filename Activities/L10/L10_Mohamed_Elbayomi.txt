@@ -1,0 +1,49 @@
+Lecture 10 – Regular Expressions (Mohamed Elbayomi) (B00957237)
+
+Name: Mohamed Elbayomi
+GitLab URL: <paste your repo link>
+=========================================================================
+Regular Expressions
+======================================================================
+First Name:
+^[A-Za-z]+( [A-Za-z]+)?\s*$
+Last Name:
+^[A-Za-z]+(['-][A-Za-z]+)*\s*$
+Email:
+^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$
+Password:
+^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{12,}$
+============================================================================================================
+Test Case Results (from L10-RegEx Test Case.txt)
+=======================================================================================
+firrst Name – Passed:
+Maria; maria; maRia; Maria Gabriella; maria Gabriella; Maria gabriella.
+(These are the lines in the file: L4–L9.) :contentReference[oaicite:0]{index=0}
+Failed: none.
+========================================================================================
+LastName – Passed:
+Smith; smith; smith-burns; Smith-Burns; smith-Burns; O'Brien; o'Brien; O'brien; o'brien.
+(Lines L13–L21.) :contentReference[oaicite:1]{index=1}
+Failed: none.
+======================================================================================================
+Email(Passed):
+someone@somewhere.com; Someone-someone@somewhere.com; someone.someone@somewhere.com;
+Someone-someone@somwewhere.com; someone@somewhere-somewhere.com; Someone-someone@somewhere.somewhere.com;
+someone.someone@somewhere.co; Someone-someone@somwewhere.info; someone.someone@somewhere-somewhere.co;
+someone.someone@somewhere-somewhere.info; Someone-someone@somwewhere.somewhere.co;
+Someone-someone@somwewhere.somewhere.inform.
+(Lines L25–L36.) :contentReference[oaicite:2]{index=2}
+Failed: none.
+================================================================================================
+Password – Passed:
+aB@3bc_e-uxE; aB@3bc_ex-U!; aB@3bc_!5-Ux; 2aB#n!3ha-b4.
+(Lines L39–L42.) :contentReference[oaicite:3]{index=3}
+Failed: none.
+===================================================================================================================-
+Reflection (3–4 sentences)
+============================================================================
+Regexr let me paste the test cases and immediately see which lines matched each
+pattern, so iterating was fast. The clearest challenge was writing the password
+regex with lookaheads to enforce all requirements at once; the live highlights
+made it easy to verify. I also allowed optional trailing whitespace for names to
+handle the raw test-file formatting without false negatives.

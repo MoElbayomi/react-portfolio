@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Magical Football Skills Shop</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="light">
+  <h1>Magical Football Skills Inventory</h1>
+  <h2>Find your dream abilities here and level up your game!</h2>
+
+  <button id="themeToggle">Switch Theme</button>
+
+  <div id="controls">
+    <input id="searchBox" type="text" placeholder="Search by name or type">
+    <button onclick="searchItems()">Search</button>
+    <button onclick="listItems()">List All</button>
+    <button onclick="calculateTotalValue()">Total Value</button>
+    <button onclick="groupByCategory()">Group by Category</button>
+    <button onclick="applyDiscount(10)">Apply 10% Discount</button>
+    <button onclick="findDuplicates()">Check Duplicates</button>
+  </div>
+
+  <!-- Add Item Section -->
+  <div id="addSection">
+    <h3>Add New Item</h3>
+    <input id="addName" type="text" placeholder="Name">
+    <input id="addType" type="text" placeholder="Type">
+    <input id="addPrice" type="number" placeholder="Price">
+    <input id="addQty" type="number" placeholder="Quantity">
+    <input id="addDesc" type="text" placeholder="Description">
+    <button onclick="handleAdd()">Add Item</button>
+  </div>
+
+  <table id="inventoryTable">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody id="inventoryBody"></tbody>
+  </table>
+
+  <div id="extraInfo"></div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
