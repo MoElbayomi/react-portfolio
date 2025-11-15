@@ -1,9 +1,0 @@
-:root { --brand:#d11141; }
-body { font-family: system-ui, Arial, sans-serif; }
-.navbar-brand { font-weight: 700; }
-.section { padding: 48px 0; }
-.card img { object-fit: cover; }
-.skip-link {
-  position:absolute; left:-10000px; top:auto; width:1px; height:1px; overflow:hidden;
-}
-.skip-link:focus { position:static; width:auto; height:auto; padding:8px; background:#fff; }
